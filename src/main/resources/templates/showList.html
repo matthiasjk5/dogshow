@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dog Show</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div style="text-align:center">
+  <h1>
+    Welcome to Dog Show
+  </h1>
+</div>
+
+<header>
+  <nav class="nav navbar-expand md navbar-dark bg-primary" style="padding-left: 0.5rem; margin-top: 1.5rem;">
+    <ul class="navbar-nav">
+      <li><a href="/" class="nav-link">WELCOME TO DOG SHOW</a></li>
+      <li><a href="/register" class="nav-link">REGISTER YOUR DOGS</a></li>
+      <li><a href="/view" class="nav-link">VIEW DOGS</a></li>
+      <li><a href="/search" class="nav-link">SEARCH DOGS</a></li>
+      <li><a href="/showList" class="nav-link">SHOW LIST</a></li>
+    </ul>
+  </nav>
+</header>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Group</th>
+    <th>Breed</th>
+    <th>Male(Class)</th>
+    <th>Female(Class)</th>
+    <th>Male(Specialty)</th>
+    <th>Female(Specialty)</th>
+  </tr>
+  </thead>
+
+  <tr th:each="showList: ${showLists}">
+    <td th:text="${showList.groupName}"></td>
+    <td th:text="${showList.breed}"></td>
+    <td th:text="${showList.maleClass}"></td>
+    <td th:text="${showList.femaleClass}"></td>
+    <td th:text="${showList.maleSpecialty}"></td>
+    <td th:text="${showList.femaleSpecialty}"></td>
+  </tr>
+
+</table>
+
+<footer class="footer bg-primary" style="position:relative;">
+  <div class="container text-center">
+    <span class="text-light">&copy; All Rights Reserved By DOG SHOW</span>
+  </div>
+</footer>
+
+</body>
+</html>

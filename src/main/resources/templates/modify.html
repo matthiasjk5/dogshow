@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dog Show</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div style="text-align:center">
+  <h1>
+    Welcome to Dog Show
+  </h1>
+</div>
+
+<header>
+  <nav class="nav navbar-expand md navbar-dark bg-primary" style="padding-left: 0.5rem;margin-top: 1.5rem;">
+    <ul class="navbar-nav">
+      <li><a href="/" class="nav-link">WELCOME TO DOG SHOW</a></li>
+      <li><a href="/register" class="nav-link">REGISTER YOUR DOGS</a></li>
+      <li><a href="/view" class="nav-link">VIEW DOGS</a></li>
+      <li><a href="/search" class="nav-link">SEARCH DOGS</a></li>
+      <li><a href="/showList" class="nav-link">SHOW LIST</a></li>
+    </ul>
+  </nav>
+</header>
+
+<form th:action="@{/modify}" method="GET" th:object="${dog}">
+  <div class="container" style="margin-top: 1rem;">
+
+    <div class="row">
+
+      <div class="form-group col-md">
+        <label>DOG'S NAME</label>
+        <input type="text" class="form-control" name="name" th:field="*{name}" placeholder="Dog's name">
+      </div>
+
+      <div class="form-group col-md">
+        <label>OWNER'S NAME</label>
+        <input type="text" class="form-control" name="ownerName" th:field="*{ownerName}" placeholder="Owner's name">
+      </div>
+
+      <div class="form-group col-md">
+        <label>BREED</label>
+        <select class="form-control" id="breed" name="breed" th:field="*{breed}">
+          <option value="Labrador Retrievers">Labrador Retrievers</option>
+          <option value="German Shepherd">German Shepherd</option>
+          <option value="Golden Retrievers">Golden Retrievers</option>
+          <option value="French Bulldogs">French Bulldogs</option>
+          <option value="Bulldogs">Bulldogs</option>
+          <option value="Beagles">Beagles</option>
+          <option value="Poodles">Poodles</option>
+          <option value="Rottweilers">Rottweilers</option>
+          <option value="Yorkshire Terriers">Yorkshire Terriers</option>
+          <option value="Boxers">Boxers</option>
+          <option value="Dachshunds">Dachshunds</option>
+          <option value="Great Danes">Great Danes</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="form-group col-md">
+        <label for="groupName">Group</label>
+        <select class="form-control" id="groupName" name="groupName" th:field="*{groupName}">
+          <option value="Sporting Dog">Sporting Dog</option>
+          <option value="Hounds">Hounds</option>
+          <option value="Working Dogs">Working Dogs</option>
+          <option value="Terriers">Terriers</option>
+          <option value="Toys">Toys</option>
+          <option value="Non Sporting">Non Sporting</option>
+          <option value="Herding">Herding</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="gender">GENDER</label>
+        <select class="form-control" id="gender" name="gender" th:field="*{gender}">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="ranking">RANKING</label>
+        <select class="form-control" id="ranking" name="ranking" th:field="*{ranking}">
+          <option value="Class">Class</option>
+          <option value="Specialty">Specialty</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md">
+        <label>Your Email</label>
+        <input type="email" class="form-control" name="email" th:field="*{email}" placeholder="Your Email">
+      </div>
+      <div class="form-group col-md">
+        <br>
+        <button type="submit" class="btn btn-primary" style="margin-top: 7px;">Submit</button>
+      </div>
+      <div class="form-group col-md">
+      </div>
+    </div>
+
+  </div>
+</form>
+
+<footer class="footer bg-primary">
+  <div class="container text-center">
+    <span class="text-light">&copy; All Rights Reserved By DOG SHOW</span>
+  </div>
+</footer>
+
+</body>
+</html>

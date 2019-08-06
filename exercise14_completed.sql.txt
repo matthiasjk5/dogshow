@@ -1,0 +1,101 @@
+DROP DATABASE IF EXISTS exercise14;
+CREATE DATABASE exercise14;
+USE exercise14;
+
+CREATE TABLE easy_drinks
+(
+    drink_name VARCHAR(16),
+    main       VARCHAR(20),
+    amount1    DEC(3, 1),
+    second     VARCHAR(20),
+    amount2    DEC(4, 2),
+    directions VARCHAR(250)
+);
+
+INSERT INTO easy_drinks
+VALUES ('Blackthorn', 'tonic water', 1.5, 'pineapple juice', 1,
+        'stir with ice, strain into cocktail glass with lemon twist'),
+       ('Blue Moon', 'soda', 1.5, 'blueberry juice', .75, 'stir with ice, strain into cocktail glass with lemon twist'),
+       ('Oh My Gosh', 'peach nectar', 1, 'pineapple juice', 1, 'stir with ice, strain into shot glass'),
+       ('Lime Fizz', 'Sprite', 1.5, 'lime juice', .75, 'stir with ice, strain into cocktail glass'),
+       ('Kiss on the Lips', 'cherry juice', 2, 'apricot nectar', 7, 'serve over ice with straw'),
+       ('Hot Gold', 'peach nectar', 3, 'orange juice', 6, 'pour hot orange juice in mug and add peach nectar'),
+       ('Lone Tree', 'soda', 1.5, 'cherry juice', .75, 'stir with ice, strain into cocktail glass'),
+       ('Greyhound', 'soda', 1.5, 'grapefruit juice', 5, 'serve over ice, stir well'),
+       ('Indian Summer', 'apple juice', 2, 'hot tea', 6, 'add juice to mug and top off with hot tea'),
+       ('Bull Frog', 'iced tea', 1.5, 'lemonade', 5, 'serve over ice with lime slice'),
+       ('Soda and It', 'soda', 2, 'grape juice', 1, 'shake in cocktail glass, no ice');
+
+
+CREATE TABLE drink_info
+(
+    drink_name VARCHAR(16),
+    cost       DEC(3, 2),
+    carbs      DEC(3, 1),
+    color      VARCHAR(10),
+    ice        VARCHAR(1),
+    calories   INTEGER(3)
+);
+
+INSERT INTO drink_info
+VALUES ('Blackthorn', '3', '8.4', 'gold', 'Y', '33'),
+       ('Blue Moon', '3.5', '3.2', 'blue', 'Y', '12'),
+       ('Oh My Gosh', '4.5', '8.6', 'orange', 'Y', '35'),
+       ('Lime Fizz', '3.5', '5.4', 'green', 'Y', '24'),
+       ('Kiss on the Lips', '5.5', '42.5', 'purple', 'Y', '170'),
+       ('Hot Gold', '3.2', '32.1', 'orange', 'N', '135'),
+       ('Lone Tree', '3.6', '4.2', 'red', 'Y', '17'),
+       ('Greyhound', '4', '14', 'gold', 'Y', '50'),
+       ('Indian Summer', '2.8', '7.2', 'brown', 'N', '30'),
+       ('Bull Frog', '2.6', '21.5', 'tan', 'Y', '80'),
+       ('Soda and It', '3.8', '4.7', 'red', 'N', '19');
+
+
+COMMIT;
+
+# 1
+
+DESC easy_drinks;
+DESC drink_info;
+SELECT *
+FROM easy_drinks;
+SELECT *
+FROM drink_info;
+
+# 2
+
+insert into drink_info (drink_name, cost, carbs, color, ice, calories)
+values ('Orange Kick', 2.00, 13.00, 'orange', 'Y', 45);
+insert into easy_drinks (drink_name, main, amount1, second, amount2, directions)
+values ('Orange Kick', 'orange juice', 2.5,'lemon juice',0.5,'serve over ice, shake well');
+
+#3
+update drink_info
+set cost=2.50 where
+drink_name='Orange Kick';
+
+#4
+alter table drink_info
+drop ice;
+alter table drink_info
+add ice varchar(1) not null default 'Y';
+
+#5
+select *
+from drink_info
+where cost <= 3.00;
+
+#6
+select *
+from drink_info
+where drink_name like 'B%';
+
+#7
+select easy_drinks.drink_name, main, second, ice from easy_drinks
+inner join   drink_info on easy_drinks.drink_name = drink_info.drink_name;
+
+
+
+
+
+
