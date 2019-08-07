@@ -6,10 +6,7 @@ import com.gyeongju.dogshow.entities.Dog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HomeController {
@@ -19,7 +16,8 @@ public class HomeController {
 
   @GetMapping("")
   public String home() {
-    return "index";
+
+    return "index.html";
   }
 
   @GetMapping("/register")
@@ -35,9 +33,11 @@ public class HomeController {
 
       Dog dog = new Dog(name, ownerName, email, breed, groupName, gender, ranking);
       DaoDog.addDogs(dog);
+
+      return "redirect:/asf";
     }
 
-    return "registerDog";
+    return "registerDog.html";
   }
 
   @GetMapping("/generate")
@@ -66,9 +66,7 @@ public class HomeController {
       model.addAttribute("dogs", DaoDog.searchDogs(condition, text));
 
       return "viewDog";
-
     }
-
   }
 
   @GetMapping("/search")

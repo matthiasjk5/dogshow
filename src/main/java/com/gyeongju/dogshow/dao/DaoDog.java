@@ -58,7 +58,6 @@ public class DaoDog {
 
       for (int i = 0; i < 10; i++) {
 
-        //      ps.setString(1, Long.toString(dog.getId()));
         ps.setString(1, DaoRandomDog.DogName.getRandomDogName());
         ps.setString(2, DaoRandomDog.OwnerName.getRandomOwnerName());
         ps.setString(3, DaoRandomDog.Breed.getRandomBreed());
