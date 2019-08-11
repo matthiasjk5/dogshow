@@ -18,18 +18,18 @@ class RegistrationController {
   @Autowired
   private User user;
 
-  @RequestMapping("/send-email")
-  public String send() {
-    user.setEmailAddress("matiakkj@gmail.com");
-
-    try {
-      notificationService.sendEmail(user);
-    } catch (MailException mailException) {
-      System.out.println(mailException);
-    }
-
-    return "Congratulations! You mail has been send to the user";
-  }
+//  @RequestMapping("/send-email")
+//  public String send() {
+//    user.setEmailAddress("matiakkj@gmail.com");
+//
+//    try {
+//      notificationService.sendEmail(dog);
+//    } catch (MailException mailException) {
+//      System.out.println(mailException);
+//    }
+//
+//    return "Congratulations! You mail has been send to the user";
+//  }
 
   @RequestMapping("send-mail-attachment")
   public String sendWithAttachment() throws MessagingException {

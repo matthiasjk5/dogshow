@@ -1,5 +1,6 @@
 package com.gyeongju.dogshow.service;
 
+import com.gyeongju.dogshow.entities.Dog;
 import com.gyeongju.dogshow.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -22,13 +23,14 @@ public class MailService {
     this.javaMailSender = javaMailSender;
   }
 
-  public void sendEmail(User user) throws MailException {
+  public void sendEmail(Dog dog) throws MailException {
 
     SimpleMailMessage mail = new SimpleMailMessage();
-    mail.setTo(user.getEmailAddress());
-    mail.setSubject("Your Dog has been registered successfully");
-    mail.setText("Hurray ! You have done that dude...");
-
+    mail.setTo(dog.getEmail());
+    mail.setSubject("Your dog has been registered successfully");
+    mail.setText("/** Your Information **/\n\n" + "Dog Name: " + dog.getName() +
+            ", Owner Name: " + dog.getOwnerName() + ", Breed: " + dog.getBreed() + "\n" +
+            "Group: " + dog.getGroupName() + ", Gender: " + dog.getGender() + ", Ranking: " + dog.getRanking());
     javaMailSender.send(mail);
   }
 

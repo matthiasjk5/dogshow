@@ -1,6 +1,7 @@
 package com.gyeongju.dogshow.dao;
 
 import com.gyeongju.dogshow.entities.Dog;
+import com.gyeongju.dogshow.entities.Handler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,6 +16,7 @@ public class DaoDog {
   @Autowired
   protected JdbcTemplate jdbcTemplate;
 
+
   public static void addDogs(Dog dog) {
 
     try {
@@ -23,7 +25,7 @@ public class DaoDog {
 
       conn = DriverManager.getConnection("jdbc:mysql://localhost/gyeongju", "root", "root");
 
-      String query ="INSERT INTO dogs (name, ownerName, email, breed, groupName, gender, ranking) VALUES (?,?,?,?,?," +
+      String query = "INSERT INTO dogs (name, ownerName, email, breed, groupName, gender, ranking) VALUES (?,?,?,?,?," +
               "?,?)";
 
       PreparedStatement ps = conn.prepareStatement(query);
@@ -39,7 +41,36 @@ public class DaoDog {
       ps.executeUpdate();
 
       conn.close();
-    } catch(Exception e) {
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+  }
+  public static void handlerAddDogs(Dog dog) {
+
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      Connection conn = null;
+
+      conn = DriverManager.getConnection("jdbc:mysql://localhost/gyeongju", "root", "root");
+
+      String query = "INSERT INTO dogs (name, ownerName, email, breed, groupName, gender, ranking, handlerName) " +
+              "VALUES (?,?,?,?,?,?,?,?)";
+
+      PreparedStatement ps = conn.prepareStatement(query);
+
+      ps.setString(1, dog.getName());
+      ps.setString(2, dog.getOwnerName());
+      ps.setString(3, dog.getEmail());
+      ps.setString(4, dog.getBreed());
+      ps.setString(5, dog.getGroupName());
+      ps.setString(6, dog.getGender());
+      ps.setString(7, dog.getRanking());
+      ps.setString(8, dog.getHandlerName());
+
+      ps.executeUpdate();
+
+      conn.close();
+    } catch (Exception e) {
       System.out.println(e);
     }
   }
@@ -52,7 +83,7 @@ public class DaoDog {
 
       conn = DriverManager.getConnection("jdbc:mysql://localhost/gyeongju", "root", "root");
 
-      String query ="INSERT INTO dogs (name, ownerName, breed, groupName, gender, ranking) VALUES (?,?,?,?,?,?)";
+      String query = "INSERT INTO dogs (name, ownerName, breed, groupName, gender, ranking) VALUES (?,?,?,?,?,?)";
 
       PreparedStatement ps = conn.prepareStatement(query);
 
@@ -70,7 +101,7 @@ public class DaoDog {
 
       conn.close();
 
-    } catch(Exception e) {
+    } catch (Exception e) {
 
       System.out.println(e);
     }
@@ -156,23 +187,42 @@ public class DaoDog {
     return dog;
   }
 
+  public ArrayList<Dog> getDogsByName(String handlerName) {
+    String q = "Select * from dogs WHERE handlerName=?";
+    ArrayList<Dog> dogList = (ArrayList<Dog>) jdbcTemplate.query(q, new Object[] { handlerName },
+            new BeanPropertyRowMapper<Dog>(Dog.class));
+    return dogList;
+
+
+  }
+
   public void deleteDogById(int id) {
     String query = "DELETE FROM dogs WHERE id=" + id;
     this.jdbcTemplate.update(query);
   }
 
   public void updateDog(Dog dog) {
-    String query = "UPDATE dogs SET name=?, ownerName=?, email=?, breed=?, groupName=?, gender=?, ranking=?";
+    String query = "UPDATE dogs SET name=?, ownerName=?, email=?, breed=?, groupName=?, gender=?, ranking=? WHERE id=?";
     Object[] params = new Object[]{dog.getName(), dog.getOwnerName(),
             dog.getEmail(), dog.getBreed(),
             dog.getGroupName(), dog.getGender(),
-            dog.getRanking()
+            dog.getRanking(), dog.getId()
     };
 
     this.jdbcTemplate.update(query, params);
-
   }
 
+  public ArrayList<Handler> getRoleName(String handlerName) {
+    String query = "SELECT * FROM handlers WHERE role_name=?";
+    ArrayList<Handler> handlerArrayList = (ArrayList<Handler>) jdbcTemplate.query(query,
+            new BeanPropertyRowMapper<>(Handler.class));
+    return handlerArrayList;
+  }
 
-
+  public Handler findUserAccount(String handlerName) {
+    String query = "Select * from handlers WHERE handlerName=?";
+    Handler handler = (Handler) jdbcTemplate.queryForObject(query, new Object[] { handlerName },
+            new BeanPropertyRowMapper<Handler>(Handler.class));
+    return handler;
+  }
 }

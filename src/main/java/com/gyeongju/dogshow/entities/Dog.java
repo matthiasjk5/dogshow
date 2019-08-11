@@ -16,12 +16,25 @@ public class Dog {
 
   private long id;
   private String name;
-  private String email;
   private String ownerName;
+  private String email;
   private String breed;
   private String groupName;
   private String gender;
   private String ranking;
+  private String handlerName;
+
+  public Dog(long id, String name, String ownerName, String email, String breed, String groupName, String gender,
+             String ranking) {
+    this.id = id;
+    this.name = name;
+    this.ownerName = ownerName;
+    this.email = email;
+    this.breed = breed;
+    this.groupName = groupName;
+    this.gender = gender;
+    this.ranking = ranking;
+  }
 
   public Dog(String name, String ownerName, String breed, String groupName, String gender, String ranking) {
     this.name = name;
@@ -41,5 +54,17 @@ public class Dog {
     this.groupName = groupName;
     this.gender = gender;
     this.ranking = ranking;
+  }
+
+  public Dog(String name, String ownerName, String email, String breed, String groupName, String gender,
+             String ranking, String handlerName) {
+    this.name = name;
+    this.ownerName = ownerName;
+    this.email = email;
+    this.breed = breed;
+    this.groupName = groupName;
+    this.gender = gender;
+    this.ranking = ranking;
+    this.handlerName = handlerName;
   }
 }

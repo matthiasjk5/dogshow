@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Dog Show</title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -52,9 +52,25 @@
     <td th:text="${dog.groupName}"></td>
     <td th:text="${dog.gender}"></td>
     <td th:text="${dog.ranking}"></td>
+    <td><a th:href="@{/editlink/{id}(id=${dog.id})}" class="btn btn-primary">EDIT</a></td>
+    <td><a th:href="@{/deletelink/{id}(id=${dog.id})}" class="btn btn-success">DELETE</a></td>
   </tr>
-
 </table>
+<div class="row">
+  <form th:action="@{/handler/register}" method="GET">
+    <div class="form-group col-md">
+      <br>
+      <button type="submit" class="btn btn-primary" style="margin-top: 7px;">ADD YOUR DOG</button>
+    </div>
+  </form>
+
+  <form action="#" th:action="@{/logout}" method="POST">
+    <div class="form-group col-md">
+      <br>
+      <input type="submit" class="btn btn-warning" value="Logout" style="margin-top: 7px;">
+    </div>
+  </form>
+</div>
 
 <footer class="footer bg-primary" style="position:absolute; bottom:0px; height:50px; left:0px; right:0px;
 overflow:hidden;">
